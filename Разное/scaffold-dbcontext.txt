@@ -1,0 +1,43 @@
+PM> scaffold-DbContext Microsoft.EntityFrameworkCore.SqlServer --help
+
+
+Usage: ef dbcontext scaffold [arguments] [options]
+
+Arguments:
+  <CONNECTION>  The connection string to the database.
+  <PROVIDER>    The provider to use. (E.g. Microsoft.EntityFrameworkCore.SqlServer)
+
+Options:
+  -d|--data-annotations         Use attributes to configure the model (where possible). If omitted, only the fluent API is used.
+  -c|--context <NAME>           The name of the DbContext.
+  --context-dir <PATH>          The directory to put DbContext file in. Paths are relative to the project directory.
+  -f|--force                    Overwrite existing files.
+  -o|--output-dir <PATH>        The directory to put files in. Paths are relative to the project directory.
+  --schema <SCHEMA_NAME>...     The schemas of tables to generate entity types for.
+  -t|--table <TABLE_NAME>...    The tables to generate entity types for.
+  --use-database-names          Use table and column names directly from the database.
+  --json                        Show JSON output.
+  -a|--assembly <PATH>          The assembly to use.
+  -s|--startup-assembly <PATH>  The startup assembly to use. Defaults to the target assembly.
+  --data-dir <PATH>             The data directory.
+  --project-dir <PATH>          The project directory. Defaults to the current directory.
+  --root-namespace <NAMESPACE>  The root namespace. Defaults to the target assembly name.
+  --language <LANGUAGE>         The language. Defaults to 'C#'.
+  --working-dir <PATH>          The working directory of the tool invoking this command.
+  -h|--help                     Show help information
+  -v|--verbose                  Show verbose output.
+  --no-color                    Don't colorize output.
+  --prefix-output               Prefix output with level.
+
+Примеры:
+
+Маппим выбранные таблицы
+scaffold-DbContext "Server=.\SQLEXPRESS;Database=BelwestDB;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -tables kcexkpo (одну таблицу)
+scaffold-DbContext "Server=.\SQLEXPRESS;Database=BelwestDB;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -tables kcexkpo, materials (несколько)
+
+Называем контекст как хотим
+scaffold-DbContext "Server=.\SQLEXPRESS;Database=BelwestDB;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -context Ebobob
+
+Смаппить и поместить файлы cs в определенную папку проекта 
+scaffold-DbContext "Server=.\SQLEXPRESS;Database=BelwestDB;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -o Model
+Если нужно перемапить, используй флаг -f тогда новые файлы заменят существующие
