@@ -41,3 +41,6 @@ scaffold-DbContext "Server=.\SQLEXPRESS;Database=BelwestDB;Trusted_Connection=Tr
 Смаппить и поместить файлы cs в определенную папку проекта 
 scaffold-DbContext "Server=.\SQLEXPRESS;Database=BelwestDB;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -o Model
 Если нужно перемапить, используй флаг -f тогда новые файлы заменят существующие
+
+Смаппить контекст в одну папку, а файлы модели в другую 
+scaffold-DbContext "Server=.\SQLEXPRESS;Database=BelwestDB;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -o Model -contextDir Data
