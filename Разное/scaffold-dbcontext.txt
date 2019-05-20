@@ -44,3 +44,6 @@ scaffold-DbContext "Server=.\SQLEXPRESS;Database=BelwestDB;Trusted_Connection=Tr
 
 Смаппить контекст в одну папку, а файлы модели в другую 
 scaffold-DbContext "Server=.\SQLEXPRESS;Database=BelwestDB;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -o Model -contextDir Data
+
+По логину и паролю 
+scaffold-DbContext "Server=172.30.6.11;Database=PreactorSDB;User ID = trofimov; password = 32306600;" Microsoft.EntityFrameworkCore.SqlServer -o Model
