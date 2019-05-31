@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<EventScript xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" SchemaVersion="1.3.0.0" ProgramVersion="16.5.0.51082">
+  <ScriptName>PBX Cycle</ScriptName>
+  <ScriptType>UserTools</ScriptType>
+  <OnEvent xsi:nil="true" />
+  <Instructions>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description>Отладочное сообщение</Description>
+      <Enabled>false</Enabled>
+      <Values>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>Start "PBX Cycle"</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>Отладка</Value>
+        </ParameterValue>
+      </Values>
+      <Action>17</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description />
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>Default</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value />
+        </ParameterValue>
+      </Values>
+      <Action>73</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description>Запомнили количество заказов в OrdersRecordCount</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>Orders</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>ScriptVariable</TypeHint>
+          <Value>OrdersRecordCount</Value>
+        </ParameterValue>
+      </Values>
+      <Action>182</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label>PBXLoop</Label>
+      <Description>Запустили PBX Step</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>PBX Step</Value>
+        </ParameterValue>
+      </Values>
+      <Action>46</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description>Получили новое количество заказов - NewOrdersRecordCount</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>Orders</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>ScriptVariable</TypeHint>
+          <Value>NewOrdersRecordCount</Value>
+        </ParameterValue>
+      </Values>
+      <Action>182</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description>Проверили, поменялось ли количество заказов</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>ScriptVariable</TypeHint>
+          <Value>NewOrdersRecordCount</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="ScriptVariableParameter">
+          <TypeHint>Number</TypeHint>
+          <VariableName>OrdersRecordCount</VariableName>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>ScriptVariable</TypeHint>
+          <Value>NothingChanged</Value>
+        </ParameterValue>
+      </Values>
+      <Action>45</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description>Если нет новых заказов - перешли на End</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="ScriptVariableParameter">
+          <TypeHint>Toggle</TypeHint>
+          <VariableName>NothingChanged</VariableName>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>End</Value>
+        </ParameterValue>
+      </Values>
+      <Action>11</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description>Инача запустили Peg Materials</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>Default</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value />
+        </ParameterValue>
+      </Values>
+      <Action>73</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description>Обновили значение OrdersRecordNumber</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>ScriptVariable</TypeHint>
+          <Value>OrdersRecordCount</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="ScriptVariableParameter">
+          <TypeHint>Number</TypeHint>
+          <VariableName>NewOrdersRecordCount</VariableName>
+        </ParameterValue>
+      </Values>
+      <Action>102</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description>И вернулись на цикл PBXLoop</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>PBXLoop</Value>
+        </ParameterValue>
+      </Values>
+      <Action>13</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label>End</Label>
+      <Description>Вывели прощальное сообщение</Description>
+      <Enabled>false</Enabled>
+      <Values>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>Выполнение завершено.</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>PBX Cycle</Value>
+        </ParameterValue>
+      </Values>
+      <Action>17</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description>Закончили выполнение</Description>
+      <Enabled>true</Enabled>
+      <Values />
+      <Action>18</Action>
+    </ScriptInstruction>
+  </Instructions>
+  <MenuItemName>Развернуть все уровни дефицита</MenuItemName>
+  <FunctionKey xsi:nil="true" />
+  <Ctrl>false</Ctrl>
+  <Shift>false</Shift>
+  <Alt>false</Alt>
+</EventScript>

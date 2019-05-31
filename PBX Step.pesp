@@ -1,0 +1,1232 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<EventScript xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" SchemaVersion="1.3.0.0" ProgramVersion="16.5.0.51082">
+  <ScriptName>PBX Step</ScriptName>
+  <ScriptType>UserTools</ScriptType>
+  <OnEvent xsi:nil="true" />
+  <Instructions>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description>Отладочное сообщение</Description>
+      <Enabled>false</Enabled>
+      <Values>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>Start "PBX Step"</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>Отладка</Value>
+        </ParameterValue>
+      </Values>
+      <Action>17</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description>Проверили, в сиквенсере ли мы сейчас</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>ScriptVariable</TypeHint>
+          <Value>IsSequencer</Value>
+        </ParameterValue>
+      </Values>
+      <Action>43</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description>Если да - перешли на InSequencer</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="ScriptVariableParameter">
+          <TypeHint>Toggle</TypeHint>
+          <VariableName>IsSequencer</VariableName>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>InSequencer</Value>
+        </ParameterValue>
+      </Values>
+      <Action>11</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description>Иначе выдали сообщение</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>Запуск возможен только с доски планирования</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>Предупреждение</Value>
+        </ParameterValue>
+      </Values>
+      <Action>17</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description>И закончили выполнение</Description>
+      <Enabled>true</Enabled>
+      <Values />
+      <Action>18</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label>InSequencer</Label>
+      <Description>Заблокировали интерфейс</Description>
+      <Enabled>true</Enabled>
+      <Values />
+      <Action>8</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description>Получили количество дефицитов в ShortagesRecordCount</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>Shortages</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>ScriptVariable</TypeHint>
+          <Value>ShortagesRecordCount</Value>
+        </ParameterValue>
+      </Values>
+      <Action>182</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description>Проверили наличие дефицитов</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>{#PESP_ShortagesRecordCount}&gt;0</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>ScriptVariable</TypeHint>
+          <Value>ShortagesExist</Value>
+        </ParameterValue>
+      </Values>
+      <Action>75</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description>Если дефицитов нет - вышли на End</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="ScriptVariableParameter">
+          <TypeHint>Toggle</TypeHint>
+          <VariableName>ShortagesExist</VariableName>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>End</Value>
+        </ParameterValue>
+      </Values>
+      <Action>12</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description>Инициировали счетчик дефицитов - ShortagesRecNo</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>ScriptVariable</TypeHint>
+          <Value>ShortagesRecNo</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="DoubleParameter">
+          <TypeHint>Number</TypeHint>
+          <Value>1</Value>
+        </ParameterValue>
+      </Values>
+      <Action>102</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description>Инициировали счетчик номеров создаваемых заказов - OrderNoIndex</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>ScriptVariable</TypeHint>
+          <Value>OrderNoIndex</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="DoubleParameter">
+          <TypeHint>Number</TypeHint>
+          <Value>0</Value>
+        </ParameterValue>
+      </Values>
+      <Action>102</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label>ShortageLoop</Label>
+      <Description>Получили ExternalDemandOrder</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>Shortages</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>External Demand Order</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="ScriptVariableParameter">
+          <TypeHint>Number</TypeHint>
+          <VariableName>ShortagesRecNo</VariableName>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>ScriptVariable</TypeHint>
+          <Value>ExternalDemandOrder</Value>
+        </ParameterValue>
+      </Values>
+      <Action>120</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description>Получили InternalDemandOrder</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>Shortages</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>Internal Demand Order</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="ScriptVariableParameter">
+          <TypeHint>Number</TypeHint>
+          <VariableName>ShortagesRecNo</VariableName>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>ScriptVariable</TypeHint>
+          <Value>InternalDemandOrder</Value>
+        </ParameterValue>
+      </Values>
+      <Action>120</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description>Получили PartNo</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>Shortages</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>Part No.</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="ScriptVariableParameter">
+          <TypeHint>Number</TypeHint>
+          <VariableName>ShortagesRecNo</VariableName>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>ScriptVariable</TypeHint>
+          <Value>PartNo</Value>
+        </ParameterValue>
+      </Values>
+      <Action>15</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description>Получили ShortageQuantity</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>Shortages</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>Shortage Quantity</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="ScriptVariableParameter">
+          <TypeHint>Number</TypeHint>
+          <VariableName>ShortagesRecNo</VariableName>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>ScriptVariable</TypeHint>
+          <Value>ShortageQuantity</Value>
+        </ParameterValue>
+      </Values>
+      <Action>120</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description>Нашли запись, соответствующую дефициту, в таблице игнорируемых дефицитов</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>Ignore Shortages</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>({#External Demand Order}=={#PESP_ExternalDemandOrder})&amp;&amp;({#Internal Demand Order}=={#PESP_InternalDemandOrder})&amp;&amp;(~{$Part No.}~==~{$PESP_PartNo}~)&amp;&amp;({#Ignore Shortages}==1)</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="DoubleParameter">
+          <TypeHint>Number</TypeHint>
+          <Value>0</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="EventScriptConstantsParameter">
+          <TypeHint>Constant</TypeHint>
+          <Value>PrObjSearchForwards</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>ScriptVariable</TypeHint>
+          <Value>IgnoreShortagesRecNo</Value>
+        </ParameterValue>
+      </Values>
+      <Action>95</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description>Проверили, есть ли игнорирование текущего дефицита</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>{#PESP_IgnoreShortagesRecNo}&gt;0</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>ScriptVariable</TypeHint>
+          <Value>IgnoreShortagesFound</Value>
+        </ParameterValue>
+      </Values>
+      <Action>75</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description>Если дефицит проигнорирован - перешли на NextShortage</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="ScriptVariableParameter">
+          <TypeHint>Toggle</TypeHint>
+          <VariableName>IgnoreShortagesFound</VariableName>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>NextShortage</Value>
+        </ParameterValue>
+      </Values>
+      <Action>11</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description>Нашли ID КЗ, для которого сформирован дефицит. Записали DemandIdRecord</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>Demand</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>{#Number}=={#PESP_ExternalDemandOrder}</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="DoubleParameter">
+          <TypeHint>Number</TypeHint>
+          <Value>0</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="EventScriptConstantsParameter">
+          <TypeHint>Constant</TypeHint>
+          <Value>PrObjSearchForwards</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>ScriptVariable</TypeHint>
+          <Value>DemandIdRecord</Value>
+        </ParameterValue>
+      </Values>
+      <Action>95</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description />
+      <Enabled>false</Enabled>
+      <Values>
+        <ParameterValue xsi:type="ScriptVariableParameter">
+          <TypeHint>String</TypeHint>
+          <VariableName>DemandIdRecord</VariableName>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>DemandIdRecord</Value>
+        </ParameterValue>
+      </Values>
+      <Action>17</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description />
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>{#PESP_DemandIdRecord}&gt;0</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>ScriptVariable</TypeHint>
+          <Value>DemandIdRecordTest</Value>
+        </ParameterValue>
+      </Values>
+      <Action>75</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description>Если Demand не найден, считываем OrderNoRead</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="ScriptVariableParameter">
+          <TypeHint>Toggle</TypeHint>
+          <VariableName>DemandIdRecordTest</VariableName>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>OrderNoRead</Value>
+        </ParameterValue>
+      </Values>
+      <Action>12</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description>Считали по найденному Id номер КЗ. Записали в DemandOrderNo</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>Demand</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>Order No.</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="ScriptVariableParameter">
+          <TypeHint>Number</TypeHint>
+          <VariableName>DemandIdRecord</VariableName>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>ScriptVariable</TypeHint>
+          <Value>DemandOrderNo</Value>
+        </ParameterValue>
+      </Values>
+      <Action>15</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description>Считали по найденному Id приоритет КЗ. Записали в Priority</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>Demand</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>Priority</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="ScriptVariableParameter">
+          <TypeHint>Number</TypeHint>
+          <VariableName>DemandIdRecord</VariableName>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>ScriptVariable</TypeHint>
+          <Value>Priority</Value>
+        </ParameterValue>
+      </Values>
+      <Action>120</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description>Считали по найденному Id статус КЗ. Записали в OrderType</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>Demand</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>Order Type</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="ScriptVariableParameter">
+          <TypeHint>Number</TypeHint>
+          <VariableName>DemandIdRecord</VariableName>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>ScriptVariable</TypeHint>
+          <Value>OrderType</Value>
+        </ParameterValue>
+      </Values>
+      <Action>120</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description />
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>CreateOrder</Value>
+        </ParameterValue>
+      </Values>
+      <Action>13</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description />
+      <Enabled>false</Enabled>
+      <Values>
+        <ParameterValue xsi:type="ScriptVariableParameter">
+          <TypeHint>String</TypeHint>
+          <VariableName>DemandOrderNo</VariableName>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>DemandOrderNo</Value>
+        </ParameterValue>
+      </Values>
+      <Action>17</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label>OrderNoRead</Label>
+      <Description>Нашли по дефицитам Id OrderNo. Записали в OrderIdRecord</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>Orders</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>{#Number}=={#PESP_InternalDemandOrder}</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="DoubleParameter">
+          <TypeHint>Number</TypeHint>
+          <Value>0</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="EventScriptConstantsParameter">
+          <TypeHint>Constant</TypeHint>
+          <Value>PrObjSearchForwards</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>ScriptVariable</TypeHint>
+          <Value>OrderIdRecord</Value>
+        </ParameterValue>
+      </Values>
+      <Action>95</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description>Считали значение String Attribute из дефицитного Id Orders. Записали в DemandOrderNo</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>Orders</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>String Attribute 4</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="ScriptVariableParameter">
+          <TypeHint>Number</TypeHint>
+          <VariableName>OrderIdRecord</VariableName>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>ScriptVariable</TypeHint>
+          <Value>DemandOrderNo</Value>
+        </ParameterValue>
+      </Values>
+      <Action>15</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description>Считали значение Priority из дефицитного Id Orders. Записали в Priority</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>Orders</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>Priority</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="ScriptVariableParameter">
+          <TypeHint>Number</TypeHint>
+          <VariableName>OrderIdRecord</VariableName>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>ScriptVariable</TypeHint>
+          <Value>Priority</Value>
+        </ParameterValue>
+      </Values>
+      <Action>120</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description>Считали значение OrderType из дефицитного Id Orders. Записали в OrderType</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>Orders</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>Order Type</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="ScriptVariableParameter">
+          <TypeHint>Number</TypeHint>
+          <VariableName>OrderIdRecord</VariableName>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>ScriptVariable</TypeHint>
+          <Value>OrderType</Value>
+        </ParameterValue>
+      </Values>
+      <Action>120</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description />
+      <Enabled>false</Enabled>
+      <Values>
+        <ParameterValue xsi:type="ScriptVariableParameter">
+          <TypeHint>String</TypeHint>
+          <VariableName>DemandOrderNo</VariableName>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>DemandOrderNo</Value>
+        </ParameterValue>
+      </Values>
+      <Action>17</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label>CreateOrder</Label>
+      <Description>Нашли продукт, соответствующий PartNo</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>Products</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>~{Part No.}~==~{$PESP_PartNo}~</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="DoubleParameter">
+          <TypeHint>Number</TypeHint>
+          <Value>0</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="EventScriptConstantsParameter">
+          <TypeHint>Constant</TypeHint>
+          <Value>PrObjSearchForwards</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>ScriptVariable</TypeHint>
+          <Value>ProductsRecNo</Value>
+        </ParameterValue>
+      </Values>
+      <Action>95</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description>Проверили, что продукт найден</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>{#PESP_ProductsRecNo}&gt;0</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>ScriptVariable</TypeHint>
+          <Value>ProductFound</Value>
+        </ParameterValue>
+      </Values>
+      <Action>75</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description>Если продукт для дефицита не найден - переходим на NextShortage</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="ScriptVariableParameter">
+          <TypeHint>Toggle</TypeHint>
+          <VariableName>ProductFound</VariableName>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>NextShortage</Value>
+        </ParameterValue>
+      </Values>
+      <Action>12</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description>Запомнили объем партии в BatchSize</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>Products</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>Numerical Attribute 2</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="ScriptVariableParameter">
+          <TypeHint>Number</TypeHint>
+          <VariableName>ProductsRecNo</VariableName>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>ScriptVariable</TypeHint>
+          <Value>BatchSize</Value>
+        </ParameterValue>
+      </Values>
+      <Action>120</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description>Проверили, что объем партии указан</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>{#PESP_BatchSize}&gt;0</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>ScriptVariable</TypeHint>
+          <Value>BatchSizeDefined</Value>
+        </ParameterValue>
+      </Values>
+      <Action>75</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description>Если нет - считаем Quantity равным CalcQuantity</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="ScriptVariableParameter">
+          <TypeHint>Toggle</TypeHint>
+          <VariableName>BatchSizeDefined</VariableName>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>MakeEqualQuantity</Value>
+        </ParameterValue>
+      </Values>
+      <Action>12</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description>Проверили, кратно количество дефицита партии или нет</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>{#PESP_ShortageQuantity}%{#PESP_BatchSize}</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>ScriptVariable</TypeHint>
+          <Value>NotDivisibleQuantity</Value>
+        </ParameterValue>
+      </Values>
+      <Action>75</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description>Если количество кратно партии - перешли на MakeEqualQuantity</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="ScriptVariableParameter">
+          <TypeHint>Toggle</TypeHint>
+          <VariableName>NotDivisibleQuantity</VariableName>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>MakeEqualQuantity</Value>
+        </ParameterValue>
+      </Values>
+      <Action>12</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description>Рассчитали кратное Quantity</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>{#PESP_ShortageQuantity} - ({#PESP_ShortageQuantity} % {#PESP_BatchSize}) + {#PESP_BatchSize}</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>ScriptVariable</TypeHint>
+          <Value>Quantity</Value>
+        </ParameterValue>
+      </Values>
+      <Action>75</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description>Перешли на OrderNoLoop</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>OrderNoLoop</Value>
+        </ParameterValue>
+      </Values>
+      <Action>13</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label>MakeEqualQuantity</Label>
+      <Description>Присвоили Quantity равным ShortageQuantity</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>ScriptVariable</TypeHint>
+          <Value>Quantity</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="ScriptVariableParameter">
+          <TypeHint>Number</TypeHint>
+          <VariableName>ShortageQuantity</VariableName>
+        </ParameterValue>
+      </Values>
+      <Action>102</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label>OrderNoLoop</Label>
+      <Description>Увеличили индекс номера заказа на 1</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>{#PESP_OrderNoIndex}+1</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>ScriptVariable</TypeHint>
+          <Value>OrderNoIndex</Value>
+        </ParameterValue>
+      </Values>
+      <Action>75</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description>Собрали номер заказа в OrderNo</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>PBX-</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="ScriptVariableParameter">
+          <TypeHint>String</TypeHint>
+          <VariableName>OrderNoIndex</VariableName>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>ScriptVariable</TypeHint>
+          <Value>OrderNo</Value>
+        </ParameterValue>
+      </Values>
+      <Action>30</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description>Нашли заказ с таким номером</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>Orders</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>~{$Order No.}~==~{$PESP_OrderNo}~</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="DoubleParameter">
+          <TypeHint>Number</TypeHint>
+          <Value>0</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="EventScriptConstantsParameter">
+          <TypeHint>Constant</TypeHint>
+          <Value>PrObjSearchForwards</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>ScriptVariable</TypeHint>
+          <Value>DuplicateOrderRecNo</Value>
+        </ParameterValue>
+      </Values>
+      <Action>95</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description>Проверили, есть ли такой заказ</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>{#PESP_DuplicateOrderRecNo}&gt;0</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>ScriptVariable</TypeHint>
+          <Value>DuplicateOrderFound</Value>
+        </ParameterValue>
+      </Values>
+      <Action>75</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description>Если да - перешли на OrderNoLoop</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="ScriptVariableParameter">
+          <TypeHint>Toggle</TypeHint>
+          <VariableName>DuplicateOrderFound</VariableName>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>OrderNoLoop</Value>
+        </ParameterValue>
+      </Values>
+      <Action>11</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description>Создали заказ - OrdersRecNo</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>Orders</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>ScriptVariable</TypeHint>
+          <Value>OrdersRecNo</Value>
+        </ParameterValue>
+      </Values>
+      <Action>70</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description>Записали Order No.</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>Orders</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>Order No.</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="ScriptVariableParameter">
+          <TypeHint>Number</TypeHint>
+          <VariableName>OrdersRecNo</VariableName>
+        </ParameterValue>
+        <ParameterValue xsi:type="ScriptVariableParameter">
+          <TypeHint>String</TypeHint>
+          <VariableName>OrderNo</VariableName>
+        </ParameterValue>
+      </Values>
+      <Action>14</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description>Записали Part No.</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>Orders</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>Part No.</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="ScriptVariableParameter">
+          <TypeHint>Number</TypeHint>
+          <VariableName>OrdersRecNo</VariableName>
+        </ParameterValue>
+        <ParameterValue xsi:type="ScriptVariableParameter">
+          <TypeHint>String</TypeHint>
+          <VariableName>PartNo</VariableName>
+        </ParameterValue>
+      </Values>
+      <Action>14</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description>Записали Quantity</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>Orders</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>Quantity</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="ScriptVariableParameter">
+          <TypeHint>Number</TypeHint>
+          <VariableName>OrdersRecNo</VariableName>
+        </ParameterValue>
+        <ParameterValue xsi:type="ScriptVariableParameter">
+          <TypeHint>Number</TypeHint>
+          <VariableName>Quantity</VariableName>
+        </ParameterValue>
+      </Values>
+      <Action>86</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description>Записали Priority</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>Orders</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>Priority</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="ScriptVariableParameter">
+          <TypeHint>Number</TypeHint>
+          <VariableName>OrdersRecNo</VariableName>
+        </ParameterValue>
+        <ParameterValue xsi:type="ScriptVariableParameter">
+          <TypeHint>Number</TypeHint>
+          <VariableName>Priority</VariableName>
+        </ParameterValue>
+      </Values>
+      <Action>86</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description>Записали Order Type</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>Orders</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>Order Type</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="ScriptVariableParameter">
+          <TypeHint>Number</TypeHint>
+          <VariableName>OrdersRecNo</VariableName>
+        </ParameterValue>
+        <ParameterValue xsi:type="ScriptVariableParameter">
+          <TypeHint>Number</TypeHint>
+          <VariableName>OrderType</VariableName>
+        </ParameterValue>
+      </Values>
+      <Action>86</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description>Развернули состав операций заказа</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>Orders</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="ScriptVariableParameter">
+          <TypeHint>Number</TypeHint>
+          <VariableName>OrdersRecNo</VariableName>
+        </ParameterValue>
+      </Values>
+      <Action>155</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description>Записали Demand Order No.</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>Orders</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>String Attribute 4</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="ScriptVariableParameter">
+          <TypeHint>Number</TypeHint>
+          <VariableName>OrdersRecNo</VariableName>
+        </ParameterValue>
+        <ParameterValue xsi:type="ScriptVariableParameter">
+          <TypeHint>String</TypeHint>
+          <VariableName>DemandOrderNo</VariableName>
+        </ParameterValue>
+      </Values>
+      <Action>14</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description>Проверка прогнозного заказа</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>{#PESP_OrderType}&gt;3</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>ScriptVariable</TypeHint>
+          <Value>OrderTypeValue</Value>
+        </ParameterValue>
+      </Values>
+      <Action>75</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description />
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="ScriptVariableParameter">
+          <TypeHint>Toggle</TypeHint>
+          <VariableName>OrderTypeValue</VariableName>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>WriteOrderType</Value>
+        </ParameterValue>
+      </Values>
+      <Action>11</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description />
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>NextShortage</Value>
+        </ParameterValue>
+      </Values>
+      <Action>13</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label>WriteOrderType</Label>
+      <Description>Записали статус Прогноз для производственных заказов под данный КЗ</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>Orders</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>Order Type</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="ScriptVariableParameter">
+          <TypeHint>Number</TypeHint>
+          <VariableName>OrdersRecNo</VariableName>
+        </ParameterValue>
+        <ParameterValue xsi:type="ScriptVariableParameter">
+          <TypeHint>Number</TypeHint>
+          <VariableName>OrderType</VariableName>
+        </ParameterValue>
+      </Values>
+      <Action>86</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label>NextShortage</Label>
+      <Description>Перешли к следующему дефициту</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>{#PESP_ShortagesRecNo}+1</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>ScriptVariable</TypeHint>
+          <Value>ShortagesRecNo</Value>
+        </ParameterValue>
+      </Values>
+      <Action>75</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description>Проверили, не закончились ли дефициты</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>{#PESP_ShortagesRecNo}&gt;{#PESP_ShortagesRecordCount}</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>ScriptVariable</TypeHint>
+          <Value>NoMoreShortages</Value>
+        </ParameterValue>
+      </Values>
+      <Action>75</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description>Если дефициты еще есть - перешли на ShortageLoop</Description>
+      <Enabled>true</Enabled>
+      <Values>
+        <ParameterValue xsi:type="ScriptVariableParameter">
+          <TypeHint>Toggle</TypeHint>
+          <VariableName>NoMoreShortages</VariableName>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>ShortageLoop</Value>
+        </ParameterValue>
+      </Values>
+      <Action>12</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label>End</Label>
+      <Description>Вывели прощальное сообщение</Description>
+      <Enabled>false</Enabled>
+      <Values>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>Выполнение завершено.</Value>
+        </ParameterValue>
+        <ParameterValue xsi:type="StringParameter">
+          <TypeHint>String</TypeHint>
+          <Value>PBX Step</Value>
+        </ParameterValue>
+      </Values>
+      <Action>17</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description>Обновили интерфейс</Description>
+      <Enabled>true</Enabled>
+      <Values />
+      <Action>51</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description>Разблокировали интерфейс</Description>
+      <Enabled>true</Enabled>
+      <Values />
+      <Action>9</Action>
+    </ScriptInstruction>
+    <ScriptInstruction xsi:type="BuiltInScriptInstruction">
+      <Label />
+      <Description>Закончили выполнение</Description>
+      <Enabled>true</Enabled>
+      <Values />
+      <Action>18</Action>
+    </ScriptInstruction>
+  </Instructions>
+  <MenuItemName>Развернуть один уровень дефицита</MenuItemName>
+  <FunctionKey xsi:nil="true" />
+  <Ctrl>false</Ctrl>
+  <Shift>false</Shift>
+  <Alt>false</Alt>
+</EventScript>
